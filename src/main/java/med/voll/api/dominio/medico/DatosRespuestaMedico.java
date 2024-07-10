@@ -1,0 +1,12 @@
+package med.voll.api.dominio.medico;
+
+import med.voll.api.direccion.DatosDireccion;
+
+public record DatosRespuestaMedico(Long id,
+                                   String nombre,
+                                   String email,
+                                   String telefono,
+                                   String documento,
+                                   String especialidad,
+                                   DatosDireccion direccion) {
+}

@@ -1,0 +1,1 @@
+alter table usuarios rename column contraseña to clave;
