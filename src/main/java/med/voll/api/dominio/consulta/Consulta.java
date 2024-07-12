@@ -11,7 +11,7 @@ import med.voll.api.dominio.paciente.Paciente;
 import java.time.LocalDateTime;
 
 @Entity(name = "Consulta")
-@Table(name = "consulta")
+@Table(name = "consultas")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +29,25 @@ public class Consulta {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
-    private LocalDateTime fechaYHorario;
 
+    private LocalDateTime horario;
+
+    @Column(name = "motivo_cancelacion")
+    @Enumerated(EnumType.STRING)
+    private MotivoCancelacion motivoCancelacion;
+
+    public Consulta(Medico medico, Paciente paciente, LocalDateTime horario){
+
+        this.medico = medico;
+        this.paciente = paciente;
+        this.horario = horario;
+
+    }
+
+    public void cancelar(MotivoCancelacion motivo){
+
+        this.motivoCancelacion = motivo;
+
+    }
 
 }

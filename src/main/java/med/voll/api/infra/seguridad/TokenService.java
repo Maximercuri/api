@@ -33,50 +33,50 @@ public class TokenService {
         }
     }
 
-//    public String getSubject(String token){
-//        if (token == null){
-//            throw new RuntimeException("Token Vacío No Valido");
-//        }
-//        DecodedJWT verifier = null;
-//        try {
-//            Algorithm algorithm = Algorithm.HMAC256(secretAPI);
-//            verifier = JWT.require(algorithm)
-//                    .withIssuer("voll med")
-//                    .build()
-//                    .verify(token);
-//            verifier.getSubject();
-//        } catch (JWTVerificationException exception){
-//            System.out.println(exception.toString());
-//        }
-//        if(verifier.getSubject() == null){
-//            throw new RuntimeException("Verificador Invalido");
-//        }
-//        return verifier.getSubject();
-//    }
-
-    public String getSubject(String token) {
-
-        if (token == null) {
+    public String getSubject(String token){
+        if (token == null){
             throw new RuntimeException("Token Vacío No Valido");
         }
-
-        Algorithm algorithm = Algorithm.HMAC256(secretAPI);
         DecodedJWT verifier = null;
         try {
+            Algorithm algorithm = Algorithm.HMAC256(secretAPI);
             verifier = JWT.require(algorithm)
                     .withIssuer("voll med")
                     .build()
                     .verify(token);
-        } catch (JWTVerificationException exception) {
-            throw new RuntimeException("Verificación de JWT fallida", exception);
+            verifier.getSubject();
+        } catch (JWTVerificationException exception){
+            System.out.println(exception.toString());
         }
-
-        if (verifier == null || verifier.getSubject() == null) {
+        if(verifier.getSubject() == null){
             throw new RuntimeException("Verificador Invalido");
         }
-
         return verifier.getSubject();
     }
+
+//    public String getSubject(String token) {
+//
+//        if (token == null) {
+//            throw new RuntimeException("Token Vacío No Valido");
+//        }
+//
+//        Algorithm algorithm = Algorithm.HMAC256(secretAPI);
+//        DecodedJWT verifier = null;
+//        try {
+//            verifier = JWT.require(algorithm)
+//                    .withIssuer("voll med")
+//                    .build()
+//                    .verify(token);
+//        } catch (JWTVerificationException exception) {
+//            throw new RuntimeException("Verificación de JWT fallida", exception);
+//        }
+//
+//        if (verifier == null || verifier.getSubject() == null) {
+//            throw new RuntimeException("Verificador Invalido");
+//        }
+//
+//        return verifier.getSubject();
+//    }
 
 
     private Instant generarFechaDeExpiracion() {
